@@ -154,7 +154,10 @@ class Creator(_Creator):
     def add_metadata(
         self, name: str, content: Union[str, bytes, datetime.date, datetime.datetime]
     ):
-        name = pascalize(name)
+        if name.lower.startswith("illustration_"):
+            name = name.capitalize()
+        else:
+            name = pascalize(name)
         if name == "Date" and isinstance(content, (datetime.date, datetime.datetime)):
             content = content.strftime("%Y-%m-%d").encode("UTF-8")
         if isinstance(content, str):
